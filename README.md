@@ -15,7 +15,7 @@ Backend:
 ### How to run
 
 1. Clone the repo
-2. Enter `todo-app` directory
+2. Enter `fullstack-todo-app` directory
 3. Run `docker-compose up` command
 4. App will be available on `http://localhost:7777`
 
