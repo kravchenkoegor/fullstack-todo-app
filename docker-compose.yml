@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  db:
+    image: "postgres:latest"
+    container_name: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: todo-app
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "7777:80"
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: "./server"
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    depends_on:
+      - db
+    environment:
+      POSTGRES_DB: todo-app
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_PORT: 5432
+    ports:
+      - "5000:5000"
+  client:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app

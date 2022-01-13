@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      @keyframes mpPreloaderBall {
+        0% {
+          transform: translateY(0px);
+        }
+        25% {
+          transform: translateY(-15px);
+        }
+        50% {
+          transform: translateY(0px);
+        }
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #app {
+        background-color: #ffffff;
+      }
+      .mp-preloader {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+      }
+      .mp-preloader__header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        height: 64px;
+        background-color: #f0f0f0;
+      }
+      .mp-preloader__body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: calc(100% - 64px);
+      }
+      .mp-preloader__ball {
+        display: flex;
+        width: 30px;
+        height: 30px;
+        margin: 0 8px;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        animation: mpPreloaderBall 1.6s infinite;
+      }
+      .mp-preloader__ball:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .mp-preloader__ball:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .mp-preloader__ball:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="mp-preloader" class="mp-preloader">
+      <div class="mp-preloader__header"></div>
+      <div class="mp-preloader__body">
+        <div class="mp-preloader__ball"></div>
+        <div class="mp-preloader__ball"></div>
+        <div class="mp-preloader__ball"></div>
+      </div>
+    </div>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

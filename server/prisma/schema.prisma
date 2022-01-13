@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model List {
+  id Int @id @default(autoincrement())
+
+  title String @db.VarChar(50)
+  icon String @db.VarChar(255)
+  createdAt DateTime @default(now()) @map(name: "created_at")
+
+  items ListItem[]
+
+  @@map(name: "lists")
+}
+
+model ListItem {
+  id Int @id @default(autoincrement())
+  
+  title String @db.VarChar(50)
+  done Boolean @default(false)
+  createdAt DateTime @default(now()) @map(name: "created_at")
+
+  listId Int @map(name: "list_id")
+  list List @relation(fields: [listId], references: [id])
+ 
+  @@map(name: "todos")
+}
